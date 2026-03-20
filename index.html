@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Österreich-Tadschikische Kulturgemeinde · OETK</title>
+<meta property="og:title" content="Österreich-Tadschikische Kulturgemeinde · OETK">
+<meta property="og:description" content="Kulturelle Brücke zwischen Österreich und Tadschikistan seit 2009">
+<meta property="og:image" content="https://oetk-website.vercel.app/logo.jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="600">
+<meta property="og:url" content="https://oetk-website.vercel.app">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #C8102E;
+  --green:  #2E7D52;
+  --gold:   #B8860B;
+  --white:  #FAFAF8;
+  --off:    #F2EFE9;
+  --text:   #1C1C1C;
+  --muted:  #6B6560;
+  --border: #DDD8CF;
+  --card:   #FFFFFF;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* FLAG STRIPE */
+.flag-stripe {
+  height: 5px;
+  background: linear-gradient(90deg,
+    var(--red) 0%,   var(--red) 33.3%,
+    #fff       33.3%,#fff       66.6%,
+    var(--green) 66.6%,var(--green) 100%);
+}
+
+/* TOPBAR */
+.topbar {
+  background: var(--off);
+  border-bottom: 1px solid var(--border);
+  padding: 7px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.topbar a { color: var(--muted); text-decoration: none; }
+.topbar a:hover { color: var(--red); }
+.topbar-contact { display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* LANG SWITCHER */
+.lang-switcher { display: flex; gap: 3px; }
+.lang-btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  border-radius: 2px;
+  font-family: inherit;
+}
+.lang-btn:hover  { background: #fff; color: var(--text); }
+.lang-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* FLAG BAR */
+.flag-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+}
+.flag-bar-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px;
+}
+.mini-flag {
+  width: 32px; height: 21px;
+  border-radius: 3px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  flex-shrink: 0; position: relative;
+}
+/* Austria: red / white / red */
+.flag-at {
+  background: linear-gradient(to bottom,
+    #ED2939 0% 33.4%, #fff 33.4% 66.6%, #ED2939 66.6% 100%);
+}
+/* Tajikistan: red / white / green */
+.flag-tj {
+  background: linear-gradient(to bottom,
+    #CC0001 0% 33.4%, #fff 33.4% 66.6%, #006B3F 66.6% 100%);
+}
+/* EU: blue with gold star */
+.flag-eu { background: #003399; }
+.flag-eu::after {
+  content: '★';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFD700; font-size: 11px; line-height: 1;
+}
+/* Vienna: red / white */
+.flag-wien {
+  background: linear-gradient(to bottom,
+    #ED2939 0% 50%, #fff 50% 100%);
+}
+
+/* HEADER */
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 16px;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark {
+  width: 46px; height: 46px; flex-shrink: 0;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+.logo-text { line-height: 1.2; }
+.logo-short { font-family: 'Libre Baskerville', serif; font-weight: 700; font-size: 20px; color: var(--red); display: block; }
+.logo-full  { font-size: 10px; color: var(--muted); letter-spacing: 0.02em; display: block; }
+
+/* BURGER */
+.burger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.burger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* NAV */
+nav { background: #fff; border-bottom: 2px solid var(--off); }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; padding: 0 24px; overflow-x: auto; }
+nav a {
+  display: inline-block;
+  padding: 11px 14px;
+  font-size: 13px; font-weight: 600;
+  color: var(--muted); text-decoration: none;
+  letter-spacing: 0.02em; transition: color 0.18s; white-space: nowrap;
+}
+nav a:hover  { color: var(--text); }
+nav a.active { color: var(--red); border-bottom: 2px solid var(--red); margin-bottom: -2px; }
+
+/* Mobile nav */
+.nav-mobile { display: none; background: #fff; border-top: 1px solid var(--border); padding: 8px 24px 16px; flex-direction: column; }
+.nav-mobile a { display: block; padding: 10px 0; font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--off); }
+.nav-mobile a:hover { color: var(--red); }
+
+/* HERO */
+.hero { background: var(--off); border-bottom: 1px solid var(--border); overflow: hidden; }
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 48px 24px 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+}
+.hero-label::before { content:''; width: 22px; height: 2px; background: var(--red); }
+.hero h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 14px;
+}
+.hero-date { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+.hero p.desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: 28px; }
+.btn-primary {
+  display: inline-block; padding: 11px 26px;
+  background: var(--red); color: #fff;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; border-radius: 2px; transition: background 0.18s, transform 0.18s;
+}
+.btn-primary:hover { background: #a8001e; transform: translateY(-1px); }
+.hero-visual {
+  border-radius: 6px; overflow: hidden;
+  box-shadow: var(--shadow);
+  aspect-ratio: 4/3;
+}
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* SECTION */
+.section { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+.section-title { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.section-title h2 { font-family: 'Libre Baskerville', serif; font-size: 20px; font-weight: 700; white-space: nowrap; }
+.section-title .line { flex: 1; height: 1px; background: var(--border); }
+.section-title .badge {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--green); border: 1px solid var(--green); padding: 3px 8px; border-radius: 2px; white-space: nowrap;
+}
+
+/* NEWS GRID */
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.news-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+  overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
+}
+.news-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+.card-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.news-card.featured { grid-column: span 2; }
+.news-card.featured .card-thumb { aspect-ratio: 16/7; }
+.news-card.featured .card-body h3 { font-size: 19px; }
+.card-body { padding: 18px; }
+.card-cat {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px; display: flex; align-items: center; gap: 5px;
+}
+.card-cat .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
+.card-cat.green { color: var(--green); }
+.card-cat.green .dot { background: var(--green); }
+.card-body h3 { font-family: 'Libre Baskerville', serif; font-size: 15px; font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 10px; }
+.card-body p.excerpt { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--off); }
+.card-date { font-size: 11px; color: var(--muted); font-weight: 600; }
+.card-more { font-size: 12px; font-weight: 700; color: var(--green); text-decoration: none; }
+.card-more:hover { color: var(--red); }
+
+/* COMPACT LIST */
+.compact-list {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+}
+.compact-item {
+  background: var(--card); padding: 18px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: background 0.18s; cursor: pointer;
+}
+.compact-thumb {
+  width: 60px; height: 48px; flex-shrink: 0;
+  border-radius: 3px; overflow: hidden;
+}
+.compact-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.compact-item:hover { background: #fdf8f2; }
+.compact-num { font-family: 'Libre Baskerville', serif; font-size: 28px; font-weight: 700; color: var(--border); line-height: 1; flex-shrink: 0; width: 36px; }
+.compact-body .cat { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+.compact-body h4 { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.compact-body .date { font-size: 11px; color: var(--muted); }
+
+/* ABOUT BAND */
+.about-band { background: linear-gradient(135deg, #C8102E 0%, #8a0020 100%); color: #fff; padding: 48px 24px; }
+.about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; align-items: center; }
+.about-text h3 { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+.about-text p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+.stat-box { text-align: center; }
+.stat-box .num { font-family: 'Libre Baskerville', serif; font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.stat-box .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+
+/* FOOTER */
+footer { background: #18120f; color: #bbb; padding: 48px 24px 0; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand h3 { font-family: 'Libre Baskerville', serif; font-size: 15px; color: #fff; margin-bottom: 10px; }
+.footer-brand p { font-size: 13px; line-height: 1.7; }
+.footer-contact { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; }
+.footer-contact a { font-size: 13px; color: #888; text-decoration: none; }
+.footer-contact a:hover { color: #fff; }
+.footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 8px; }
+.footer-col a { font-size: 13px; color: #888; text-decoration: none; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding: 16px 0; display: flex; justify-content: space-between; font-size: 11px; color: #444; flex-wrap: wrap; gap: 8px; }
+.footer-bottom a { color: #444; text-decoration: none; }
+.footer-bottom a:hover { color: #888; }
+
+/* CANVAS BACKGROUND */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible, .reveal-left.visible, .reveal-right.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 24px; padding: 28px 20px; }
+  .hero-visual { order: -1; max-height: 200px; font-size: 48px; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card.featured { grid-column: span 1; }
+  .news-card.featured .card-thumb { aspect-ratio: 16/9; font-size: 38px; }
+  .news-card.featured .card-body h3 { font-size: 16px; }
+  .compact-list { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr 1fr; }
+  .about-text { grid-column: span 2; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .nav-inner { display: none; }
+  .burger { display: flex; }
+}
+@media (max-width: 600px) {
+  .logo-full { display: none; }
+  .topbar-contact { gap: 10px; }
+  .about-inner { grid-template-columns: 1fr 1fr; }
+  .stat-box .num { font-size: 30px; }
+  .section { padding: 28px 16px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="flag-stripe"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-contact">
+    <a href="tel:+4366565830000">📞 +43 660 565 8300</a>
+    <a href="mailto:contact@oetk.org">✉ contact@oetk.org</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn"        onclick="setLang('tj')">TJ</button>
+    <button class="lang-btn"        onclick="setLang('ru')">RU</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"><img src="logo.jpg" alt="OETK Logo"></div>
+      <div class="logo-text">
+        <span class="logo-short">OETK</span>
+        <span class="logo-full">Österreich-Tadschikische Kulturgemeinde</span>
+      </div>
+    </a>
+    <button class="burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- FLAG BAR -->
+<div class="flag-bar">
+  <div class="flag-bar-inner">
+    <div class="mini-flag flag-at"></div>
+    <div class="mini-flag flag-tj"></div>
+  </div>
+</div>
+
+<!-- NAV desktop -->
+<nav>
+  <div class="nav-inner" id="navDesktop">
+    <a href="#" class="active" data-key="nav_home"></a>
+    <a href="#" data-key="nav_projects"></a>
+    <a href="#" data-key="nav_archive"></a>
+    <a href="#" data-key="nav_tajikistan"></a>
+    <a href="#" data-key="nav_verein"></a>
+    <a href="#" data-key="nav_press"></a>
+    <a href="#" data-key="nav_member"></a>
+    <a href="#" data-key="nav_links"></a>
+    <a href="#" data-key="nav_contact"></a>
+  </div>
+</nav>
+
+<!-- NAV mobile -->
+<div class="nav-mobile" id="navMobile">
+  <a href="#" data-key="nav_home"></a>
+  <a href="#" data-key="nav_projects"></a>
+  <a href="#" data-key="nav_archive"></a>
+  <a href="#" data-key="nav_tajikistan"></a>
+  <a href="#" data-key="nav_verein"></a>
+  <a href="#" data-key="nav_press"></a>
+  <a href="#" data-key="nav_member"></a>
+  <a href="#" data-key="nav_links"></a>
+  <a href="#" data-key="nav_contact"></a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label" data-key="hero_label"></div>
+      <h1 data-key="hero_title"></h1>
+      <div class="hero-date">19 · 03 · 2026</div>
+      <p class="desc" data-key="hero_desc"></p>
+      <a href="#" class="btn-primary" data-key="read_more"></a>
+    </div>
+    <div class="hero-visual"><img src="Navruzi.Shakurzoda1.jpeg" alt=""></div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<div class="section">
+  <div class="section-title">
+    <h2 data-key="news_title"></h2>
+    <div class="line"></div>
+    <span class="badge" data-key="news_badge"></span>
+  </div>
+
+  <div class="news-grid">
+    <div class="news-card featured">
+      <div class="card-thumb"><img src="Rudaki.logo.jpeg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat"><span class="dot"></span><span data-key="cat_culture"></span></div>
+        <h3 data-key="n1_title"></h3>
+        <p class="excerpt" data-key="n1_desc"></p>
+        <div class="card-footer">
+          <span class="card-date">09.01.2026</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-thumb"><img src="Sharif.Nazar.jpeg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat green"><span class="dot"></span><span data-key="cat_sport"></span></div>
+        <h3 data-key="n2_title"></h3>
+        <div class="card-footer">
+          <span class="card-date">30.12.2025</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-thumb"><img src="MuhammadjonAzimov003.jpeg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat green"><span class="dot"></span><span data-key="cat_sport"></span></div>
+        <h3 data-key="n3_title"></h3>
+        <div class="card-footer">
+          <span class="card-date">20.12.2025</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-thumb"><img src="Shomifarhangi.15.11.25.jpeg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat"><span class="dot"></span><span data-key="cat_event"></span></div>
+        <h3 data-key="n4_title"></h3>
+        <div class="card-footer">
+          <span class="card-date">15.11.2025, Wien</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-thumb"><img src="HammerHafezGoethe.1.jpg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat"><span class="dot"></span><span data-key="cat_community"></span></div>
+        <h3 data-key="n5_title"></h3>
+        <div class="card-footer">
+          <span class="card-date">03.12.2025</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <div class="card-thumb"><img src="Davrahoi_omuzishi01.jpeg" alt=""></div>
+      <div class="card-body">
+        <div class="card-cat"><span class="dot"></span><span data-key="cat_announce"></span></div>
+        <h3 data-key="n6_title"></h3>
+        <div class="card-footer">
+          <span class="card-date">25.11.2025, Wien</span>
+          <a href="#" class="card-more" data-key="read_more"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MORE NEWS -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">
+    <h2 data-key="more_news"></h2>
+    <div class="line"></div>
+  </div>
+  <div class="compact-list">
+    <div class="compact-item">
+      <div class="compact-thumb"><img src="MuhammadAzimov.01.jpeg" alt=""></div>
+      <div class="compact-num">07</div>
+      <div class="compact-body">
+        <div class="cat" data-key="cat_sport"></div>
+        <h4 data-key="n7_title"></h4>
+        <div class="date">15.11.2025</div>
+      </div>
+    </div>
+    <div class="compact-item">
+      <div class="compact-thumb"><img src="Nationalsfeiertag.1.jpeg" alt=""></div>
+      <div class="compact-num">08</div>
+      <div class="compact-body">
+        <div class="cat" data-key="cat_culture"></div>
+        <h4 data-key="n8_title"></h4>
+        <div class="date">26.10.2025</div>
+      </div>
+    </div>
+    <div class="compact-item">
+      <div class="compact-thumb"><img src="Tadschikischeorchester.wien.jpeg" alt=""></div>
+      <div class="compact-num">09</div>
+      <div class="compact-body">
+        <div class="cat" data-key="cat_culture"></div>
+        <h4 data-key="n9_title"></h4>
+        <div class="date">17.09.2025</div>
+      </div>
+    </div>
+    <div class="compact-item">
+      <div class="compact-thumb"><img src="FcPamir.0001.png" alt=""></div>
+      <div class="compact-num">10</div>
+      <div class="compact-body">
+        <div class="cat" data-key="cat_sport"></div>
+        <h4 data-key="n10_title"></h4>
+        <div class="date">05.09.2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT BAND -->
+<section class="about-band">
+  <div class="about-inner">
+    <div class="about-text">
+      <h3 data-key="about_title"></h3>
+      <p data-key="about_text"></p>
+    </div>
+    <div class="stat-box"><div class="num">2009</div><div class="lbl" data-key="stat_founded"></div></div>
+    <div class="stat-box"><div class="num">500+</div><div class="lbl" data-key="stat_members"></div></div>
+    <div class="stat-box"><div class="num">200+</div><div class="lbl" data-key="stat_events"></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Österreich-Tadschikische Kulturgemeinde</h3>
+      <p data-key="footer_about"></p>
+      <div class="footer-contact">
+        <a href="tel:+4366565830000">📞 +43 660 565 8300</a>
+        <a href="mailto:contact@oetk.org">✉ contact@oetk.org</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-key="footer_nav"></h4>
+      <ul>
+        <li><a href="#" data-key="nav_home"></a></li>
+        <li><a href="#" data-key="nav_projects"></a></li>
+        <li><a href="#" data-key="nav_archive"></a></li>
+        <li><a href="#" data-key="nav_verein"></a></li>
+        <li><a href="#" data-key="nav_contact"></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-key="footer_social"></h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Österreich-Tadschikische Kulturgemeinde</span>
+    <a href="#" data-key="footer_privacy"></a>
+  </div>
+</footer>
+
+<script>
+/* ── FLOATING STONES BACKGROUND ── */
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const PALETTE = ['#e8dece','#ddd8cf','#d4c9b4','#c8b89a','#e0d5c5','#cfc4b0'];
+  const stones = Array.from({length: 28}, () => ({
+    x:  Math.random() * window.innerWidth,
+    y:  Math.random() * window.innerHeight,
+    rx: 14 + Math.random() * 38,
+    ry:  9 + Math.random() * 22,
+    rot: Math.random() * Math.PI * 2,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    vr: (Math.random() - 0.5) * 0.0015,
+    color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+    alpha: 0.12 + Math.random() * 0.18,
+  }));
+
+  function drawStone(s){
+    ctx.save();
+    ctx.globalAlpha = s.alpha;
+    ctx.translate(s.x, s.y);
+    ctx.rotate(s.rot);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, s.rx, s.ry, 0, 0, Math.PI * 2);
+    ctx.fillStyle = s.color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stones.forEach(s => {
+      s.x += s.vx; s.y += s.vy; s.rot += s.vr;
+      if (s.x < -60) s.x = canvas.width  + 60;
+      if (s.x > canvas.width  + 60) s.x = -60;
+      if (s.y < -60) s.y = canvas.height + 60;
+      if (s.y > canvas.height + 60) s.y = -60;
+      drawStone(s);
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ── SCROLL REVEAL ── */
+(function(){
+  function init(){
+    // News cards — staggered fade-up
+    document.querySelectorAll('.news-card').forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i * 0.08) + 's';
+    });
+    // Section titles — slide from left
+    document.querySelectorAll('.section-title').forEach(el => el.classList.add('reveal-left'));
+    // Compact items — staggered fade-up
+    document.querySelectorAll('.compact-item').forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i * 0.08) + 's';
+    });
+    // About stats — slide from right
+    document.querySelectorAll('.stat-box').forEach((el, i) => {
+      el.classList.add('reveal-right');
+      el.style.transitionDelay = (i * 0.12) + 's';
+    });
+    // About text — slide from left
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) aboutText.classList.add('reveal-left');
+    // Footer columns
+    document.querySelectorAll('.footer-grid > *').forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i * 0.1) + 's';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+  }
+  document.addEventListener('DOMContentLoaded', init);
+})();
+
+const i18n = {
+  de: {
+    nav_home:'Home', nav_projects:'Projekte', nav_archive:'Archiv',
+    nav_tajikistan:'Tadschikistan', nav_verein:'Verein', nav_press:'Presse',
+    nav_member:'Mitgliedschaft', nav_links:'Links', nav_contact:'Kontakt',
+    hero_label:'Aktuelles',
+    hero_title:'Eid al-Fitr Mubarak!',
+    hero_desc:'Wir wünschen allen Muslimen und der tadschikischen Gemeinschaft in Österreich ein frohes Fest. Möge dieser Tag Freude und Gesundheit bringen!',
+    read_more:'Weiterlesen →',
+    news_title:'Aktuelle Nachrichten', news_badge:'Neuigkeiten', more_news:'Weitere Meldungen',
+    cat_culture:'Kultur', cat_sport:'Sport', cat_event:'Veranstaltung',
+    cat_community:'Gemeinschaft', cat_announce:'Ankündigung',
+    n1_title:'Gedenkveranstaltung zu Ehren von Rudaki in Wien',
+    n1_desc:'In der österreichischen Hauptstadt fand eine Feier zum Gedenken an den Begründer der klassischen persisch-tadschikischen Dichtung statt.',
+    n2_title:'Sharif Nazarov – Legende des tadschikischen Fußballs ist verstorben',
+    n3_title:'Erfolg von Muhammadjon Azimov im Boxkampf',
+    n4_title:'Kultureller Abend mit traditionellen Klängen und Melodien',
+    n5_title:'Erstes Treffen der persischsprachigen Diasporas in Wien',
+    n6_title:'Ankündigung: Kulturelle Kurse für Kinder und Jugendliche',
+    n7_title:'Sieg von Muhammadjon Azimov bei der Vendetta Fight Night',
+    n8_title:'Österreichischer Nationalfeiertag gefeiert',
+    n9_title:'Konzert des Staatlichen Symphonieorchesters Tadschikistans in Wien',
+    n10_title:'Das Team „Pamir Dushanbe" betritt wieder das Spielfeld',
+    about_title:'Wer wir sind',
+    about_text:'Die Österreich-Tadschikische Kulturgemeinde fördert seit 2009 den kulturellen Austausch zwischen Österreich und Tadschikistan. Wir organisieren Veranstaltungen, Festivals und Bildungsprogramme für die tadschikische Gemeinschaft in Wien.',
+    stat_founded:'Gegründet', stat_members:'Mitglieder', stat_events:'Veranstaltungen',
+    footer_about:'Gemeinnütziger Kulturverein zur Förderung der tadschikisch-österreichischen Freundschaft und des kulturellen Erbes.',
+    footer_nav:'Navigation', footer_social:'Soziale Medien', footer_privacy:'Datenschutzerklärung',
+    flag_at:'Österreich', flag_tj:'Tadschikistan', flag_eu:'EU', flag_wien:'Wien',
+  },
+  tj: {
+    nav_home:'Хона', nav_projects:'Лоиҳаҳо', nav_archive:'Архив',
+    nav_tajikistan:'Тоҷикистон', nav_verein:'Анҷуман', nav_press:'Расона',
+    nav_member:'Узвият', nav_links:'Пайвандҳо', nav_contact:'Тамос',
+    hero_label:'Навини рӯз',
+    hero_title:'Иди Сайиди Фитр Муборак!',
+    hero_desc:'Ба ҳамаи мусулмонони ҷаҳон ва ҷомеаи тоҷикони Австрия иди муборак мегӯем. Рӯзи шод ва пур аз саломат бошад!',
+    read_more:'Тафсилоти бештар →',
+    news_title:'Охирин Хабарҳо', news_badge:'Ахбор', more_news:'Дигар Хабарҳо',
+    cat_culture:'Фарҳанг', cat_sport:'Варзиш', cat_event:'Рӯйдод',
+    cat_community:'Ҷамоа', cat_announce:'Эълон',
+    n1_title:'Бузургдошти Абӯабдуллоҳи Рӯдакӣ дар шаҳри Вена',
+    n1_desc:'Дар пойтахти Австрия маросими бузургдошти асосгузори назми классикии форсу тоҷик баргузор гардид.',
+    n2_title:'Шариф Назаров — Устураи Футболи Тоҷик Даргузашт',
+    n3_title:'Пирӯзии Муҳаммадҷон Азимов дар муштзанӣ',
+    n4_title:'Шоми фарҳангӣ бо савту навои мардумӣ',
+    n5_title:'Ҳамоиши нахустини диаспораҳои форсизабон дар Вена',
+    n6_title:'Эълони давраҳои фарҳангӣ барои кӯдакон ва наврасон',
+    n7_title:'Пирӯзии Муҳаммадҷон Азимов дар Vendetta Fight Night',
+    n8_title:'Рӯзи миллии Утриш ҷашн гирифта шуд',
+    n9_title:'Консерти Оркестри Давлатии Симфонии Тоҷикистон дар Вена',
+    n10_title:'Дастаи «Помир Душанбе» боз ба майдон мебарояд',
+    about_title:'Мо кӣ ҳастем',
+    about_text:'Анҷумани Фарҳангии Тоҷикистон ва Утриш аз соли 2009 мубодилаи фарҳангӣ ва дӯстии байни Австрия ва Тоҷикистонро тақвият мебахшад. Мо барномаҳои фарҳангӣ ва таълимиро барои ҷомеаи тоҷикони Вена ташкил мекунем.',
+    stat_founded:'Соли таъсис', stat_members:'Аъзоён', stat_events:'Рӯйдодҳо',
+    footer_about:'Созмони фарҳангии ғайритиҷоратӣ барои тарғиби дӯстии тоҷикӣ-австриягӣ ва мероси фарҳангӣ.',
+    footer_nav:'Саҳифаҳо', footer_social:'Шабакаҳои иҷтимоӣ', footer_privacy:'Ҳифзи маълумот',
+    flag_at:'Утриш', flag_tj:'Тоҷикистон', flag_eu:'ИА', flag_wien:'Вена',
+  },
+  ru: {
+    nav_home:'Главная', nav_projects:'Проекты', nav_archive:'Архив',
+    nav_tajikistan:'Таджикистан', nav_verein:'Союз', nav_press:'Пресса',
+    nav_member:'Членство', nav_links:'Ссылки', nav_contact:'Контакт',
+    hero_label:'Новость дня',
+    hero_title:'Ид аль-Фитр Мубарак!',
+    hero_desc:'Поздравляем всех мусульман мира и таджикскую общину Австрии с праздником. Пусть этот день принесёт радость и здоровье!',
+    read_more:'Читать далее →',
+    news_title:'Последние новости', news_badge:'Новости', more_news:'Другие новости',
+    cat_culture:'Культура', cat_sport:'Спорт', cat_event:'Мероприятие',
+    cat_community:'Сообщество', cat_announce:'Объявление',
+    n1_title:'Вечер памяти Рудаки в Вене',
+    n1_desc:'В столице Австрии прошла торжественная церемония, посвящённая основоположнику классической персидско-таджикской поэзии.',
+    n2_title:'Шариф Назаров — легенда таджикского футбола — скончался',
+    n3_title:'Победа Мухаммадджона Азимова в боксёрском поединке',
+    n4_title:'Культурный вечер с традиционными мелодиями',
+    n5_title:'Первая встреча персоязычных диаспор в Вене',
+    n6_title:'Объявление: культурные кружки для детей и молодёжи',
+    n7_title:'Победа Мухаммадджона Азимова на Vendetta Fight Night',
+    n8_title:'Отмечен австрийский национальный праздник',
+    n9_title:'Концерт Государственного симфонического оркестра Таджикистана в Вене',
+    n10_title:'Команда «Памир Душанбе» снова выходит на поле',
+    about_title:'О нас',
+    about_text:'Австро-Таджикский культурный союз с 2009 года содействует культурному обмену и дружбе между Австрией и Таджикистаном. Мы организуем культурные мероприятия, фестивали и образовательные программы для таджикской общины Вены.',
+    stat_founded:'Основан', stat_members:'Членов', stat_events:'Мероприятий',
+    footer_about:'Некоммерческая культурная организация, содействующая таджикско-австрийской дружбе и сохранению культурного наследия.',
+    footer_nav:'Навигация', footer_social:'Социальные сети', footer_privacy:'Политика конфиденциальности',
+    flag_at:'Австрия', flag_tj:'Таджикистан', flag_eu:'ЕС', flag_wien:'Вена',
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const v = i18n[lang]?.[el.getAttribute('data-key')];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.documentElement.lang = lang;
+}
+
+function toggleMenu() {
+  const m = document.getElementById('navMobile');
+  const open = m.style.display === 'flex';
+  m.style.display = open ? 'none' : 'flex';
+  document.getElementById('burger').classList.toggle('open', !open);
+}
+
+document.addEventListener('DOMContentLoaded', () => setLang('de'));
+</script>
+</body>
+</html>
